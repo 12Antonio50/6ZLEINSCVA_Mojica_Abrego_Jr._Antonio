@@ -25,14 +25,14 @@ int main(){
 	}
 	for(int i=0; i<fila; i++){
 		for(int a=0; a<columna; a++){
-		cout<<matriz[i][a]<<"  ";
+		cout<<matriz[i][a];
 		}
 		cout<<endl;
 	}
 	cout<<"Matriz transpuesta"<<endl;
 	for(int i=0; i<fila; i++){
 		for(int a=0; a<columna; a++){
-		cout<<matriz[a][i]<<"  ";
+		cout<<matriz[a][i];
 		}
 		cout<<endl;
 	}
