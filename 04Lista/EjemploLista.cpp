@@ -79,7 +79,7 @@ int main(){
 				cout<<"Mostrar los valores de la lista\n";
 				cout<<"Imprimir valores";
 				break;
-			default;
+			default:
 			         cout<<"Gracias por mimir aqui uwu";
 		}
 		
@@ -96,4 +96,15 @@ inslista->valor=c;
 Nodo *aux=lista;
 Nodo *aux2;
 //meter los valores de la forma ordenada 
+while ((aux != NULL)&& (aux -> valor < c)){
+	aux2 = aux;
+	aux = aux -> siguiente;
+}
+if (inslista == aux){
+	lista = inslista;
+}else{
+	aux2 -> siguiente = inslista;
+}
+inslista -> siguiente = aux;
+cout<<"Elemento "<<c<<"insertado";
 }
