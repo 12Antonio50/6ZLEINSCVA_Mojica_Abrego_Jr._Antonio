@@ -49,6 +49,7 @@ struct Nodo{
 
 //definir los metodos 
 void insertarlista(Nodo *&, int);
+void mostrarLista(Nodo *);
 
 int main(){
 	//declarar mi variable de la lista que apunte a null
@@ -78,6 +79,7 @@ int main(){
 			case 2:
 				cout<<"Mostrar los valores de la lista\n";
 				cout<<"Imprimir valores";
+				mostrarLista(lista);
 				break;
 			default:
 			         cout<<"Gracias por mimir aqui uwu";
@@ -107,4 +109,13 @@ if (inslista == aux){
 }
 inslista -> siguiente = aux;
 cout<<"Elemento "<<c<<"insertado";
+}
+void mostrarLista(Nodo *lista){
+	Nodo *actual = new Nodo();
+	actual = lista;
+	
+	while (actual != NULL){
+		cout<<actual -> valor<<"-> ";
+		actual = actual -> siguiente; 
+	}
 }

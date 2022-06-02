@@ -8,7 +8,7 @@ int main(){
 	int diaA, mesA, anA;
 	int edadD, edadM, edadA, edadDt;
 	
-	while(diaN >=32 || mesN >=13 || anN < 1900|| anN > 2022 ){
+	do{
 	
 	cout<<"Ingresa la fecha de nacimiento DD/MM/AA"<<endl;
 	cin>>diaN;
@@ -25,10 +25,13 @@ int main(){
 			cout<<"Naciste en un anio bisiesto"<<endl;
 		}
 	}else if(diaN >28 && mesN == 2){
-		cout<<"Error ya que febrero tiene solo 28 dias";
+		cout<<"Error ya que febrero tiene solo 28 dias cuando el anio no es y 29 dias cuando si es bisiesto, volver a ingresar DD/MM/AA"<<endl;
+  cin>>diaN;
+	cin>>mesN;
+	cin>>anN;
 	}
 		
-	}
+	}while(diaN >=32 || mesN >=13 || anN < 1900|| anN > 2022 || diaA >29 && mesN ==2 );
 	
 	do{
 	cout<<"Ingresa la fecha actual DD/MM/AA"<<endl;
