@@ -160,6 +160,77 @@ int buscar(int d){
 3. final solo se apunta y se ajusta el apuntador 
 
 */
+void insertar(int dat){
+	//saber si esta vacia la lista
+	if(!i){
+		
+		//es la primera vez que se mete un dato
+		i= new(dato);
+		i->s=NULL;
+		i->i = dat;
+		return;
+	}
+	if(buscar(dat)){
+		//porque si existe 
+		cout<<"El dato existe";
+		getch();
+		return;
+	}
+	/*
+	supongamos que tenemos lo sig. 
+	nodo1 = -3, nodo2 =0, nodo3 = 5
+	insertar 3
+	
+	*/
+	
+	e = new (dato);
+	
+	e->i =dato;
+	
+	
+	if(p == i && p -> s){
+		//promero hago la comparacion
+		if (p ->i < e->i){
+		//fina 	
+			p->s =e;
+			e->s = NULL;
+		}else{
+			e->s = p;
+			i=e;
+		}
+		return;
+	}
+	if(p->s ){
+		a ->s =e;
+		e ->s P;
+		return;
+	}
+	if (e ->i > p->i ){
+		e -> s =NULL;
+		p->s = e;
+	}else{
+		a->s = e;
+		e->s= p;
+		
+	}
+}
+//borrar
+void borrar(void){
+	cout<<"\n Ingresa el dato que deseas borrar";
+	cin>>da;
+	if(buscar(da)){
+		if(a){
+		a->s = p->s;
+	}else{
+		i = p ->s;
+	}
+	delete (p);
+	cout<<"\n Dato eliminado";
+}else{
+	cout<<"\n Dato no encontrado";
+	getch();
+}
+}
 
 
 
