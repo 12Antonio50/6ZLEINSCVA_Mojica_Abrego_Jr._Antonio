@@ -37,24 +37,24 @@ empty()
 */
 
 #include <iostream>
+
 using namespace std;
 
 //definir la estructura de la lista
 struct Nodo{
 	//los valores de la lista
-	int valor;
+	int valor ;
 	Nodo *siguiente;
 };
 
 
 //definir los metodos 
 void insertarlista(Nodo *&, int);
-void mostrarLista(Nodo *);
+void mLista(Nodo *);
 
 int main(){
 	//declarar mi variable de la lista que apunte a null
 	Nodo *lista = NULL;
-	
 	//variables
 	int op=1, c, i=0, valores;
 	cout<<"Trabajando con listas(simples, doblemente enlazadas, circulares y circulares dobles)"<<endl;
@@ -69,53 +69,60 @@ int main(){
 				cout<<"Indica el numero de valores a introducir\n";
 				cin>>valores;
 				while(i<valores){
-					cout<<"Valor["<<i<<"]\n";
+					cout<<"Valor["<<i+1<<"]\n";
 					cin>>c;
 					//insertar el valor
-					insertarlista(lista, c);
 					i++;
+					insertarlista(lista,c);
 					}
 					break;
 			case 2:
-				cout<<"Mostrar los valores de la lista\n";
-				cout<<"Imprimir valores";
-				mostrarLista(lista);
+			/*	cout<<"Mostrar los valores de la lista\n";
+				cout<<"Imprimir valores\n";*/
+				mLista(lista);
 				break;
 			default:
-			         cout<<"Gracias por mimir aqui uwu";
+			         cout<<"Gracias\n";
 		}
 		
 	}
 	return 0;
-}
-void insertarlista(Nodo *& lista, int c){
-//crear una nueva lista
-Nodo *inslista=new Nodo();
-//debo de asigar el valor de la lista
-inslista->valor=c;
-
-//necesitar un auxiliar para encadenar los valores de la lista
-Nodo *aux=lista;
-Nodo *aux2;
-//meter los valores de la forma ordenada 
-while ((aux != NULL)&& (aux -> valor < c)){
-	aux2 = aux;
-	aux = aux -> siguiente;
-}
-if (inslista == aux){
-	lista = inslista;
-}else{
-	aux2 -> siguiente = inslista;
-}
-inslista -> siguiente = aux;
-cout<<"Elemento "<<c<<"insertado";
-}
-void mostrarLista(Nodo *lista){
-	Nodo *actual = new Nodo();
-	actual = lista;
 	
-	while (actual != NULL){
-		cout<<actual -> valor<<"-> ";
-		actual = actual -> siguiente; 
+}
+
+
+void insertarlista(Nodo *&lista, int c){
+//crear una nueva lista
+	Nodo *inslista = new Nodo();
+//debo de asigar el valor de la lista
+	inslista->valor = c;
+//necesitar un auxiliar para encadenar los valores de la lista
+	Nodo *aux1= lista;
+	Nodo *aux2;
+//meter los valores de la forma ordenada 
+	while ((aux1 != NULL)&& (aux1->valor < c)){
+		aux2 = aux1;
+		aux1 = aux1->siguiente;
+	}
+	if (lista == aux1){
+		lista = inslista;
+	}else{
+		aux2->siguiente = inslista;
+	}
+	inslista->siguiente = aux1;
+
+	cout<<"Elemento "<<c<<" insertado\n\n";
+}
+
+void mLista(Nodo *lista){
+	Nodo *lis = new Nodo();
+	lis = lista;
+	
+	while(lis != NULL){
+		cout<<">><<"<<lis->valor<<">><<\n"<<endl;
+		lis = lis->siguiente;
+	}
+	if(lista == NULL){
+		cout<<"\nLista vacia\n"<<endl;
 	}
 }

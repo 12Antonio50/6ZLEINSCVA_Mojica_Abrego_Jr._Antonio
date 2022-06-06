@@ -35,7 +35,7 @@ void menu(void);
 
 //principal
 main(){
-	menu()
+	menu();
 }
 //menu
 
@@ -160,7 +160,7 @@ int buscar(int d){
 3. final solo se apunta y se ajusta el apuntador 
 
 */
-void insertar(int dat){
+void insertar(int da){
 	//saber si esta vacia la lista
 	if(!i){
 		

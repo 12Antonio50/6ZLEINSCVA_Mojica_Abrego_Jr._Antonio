@@ -15,7 +15,7 @@ int main(){
 	cin>>mesN;
 	cin>>anN;
 	
-	
+	ojl
 	if(diaN >=32 || mesN >=13 ||anN < 1900|| anN > 2022 ){
 		cout<<"Error volver a ingresar datos"<<endl;
 	}else if((anN %  4 == 0 && anN % 100 != 0 || anN % 400 == 0)){
