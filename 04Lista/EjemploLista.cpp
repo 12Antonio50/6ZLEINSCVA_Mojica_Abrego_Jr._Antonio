@@ -69,10 +69,10 @@ int main(){
 				cout<<"Indica el numero de valores a introducir\n";
 				cin>>valores;
 				while(i<valores){
-					cout<<"Valor["<<i+1<<"]\n";
+					cout<<"Valor["<<i<<"]\n";
 					cin>>c;
-					//insertar el valor
 					i++;
+					//insertar el valor
 					insertarlista(lista,c);
 					}
 					break;

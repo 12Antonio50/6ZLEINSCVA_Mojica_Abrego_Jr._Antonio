@@ -25,13 +25,14 @@ struct dato{
 }*a, *i, *p, *e;
 
 //metodos
+int da;
 int buscar(int d);
-void insertar(void);
+void insertar(int dat);
 void mostrar(void);
 void borrar(void);
 void menu(void);
-//void guardar(void);
-//void cargar (void);
+void guardar(void);
+void cargar (void);
 
 //principal
 main(){
@@ -45,30 +46,30 @@ void menu(void){
 		
 		//imprimir menu
 		cout<<"Ejemplo de una lista con apuntadores"<<endl;
-		cout<<"\n1. buscar dato";
-		cout<<"\n2. insertar dato";
-		cout<<"\n3. mostrar dato";
-		cout<<"\n4. borrar dato";
-		cout<<"\n5. guardar dato en un archivo";
-		cout<<"\n6. cargar dato en un archivo";
-		cout<<"\n7. salir";
-		cout<<"\n1. Seleccione la opcion deseada";
+		cout<<"\n1. Buscar dato";
+		cout<<"\n2. Insertar dato";
+		cout<<"\n3. Mostrar dato";
+		cout<<"\n4. Borrar dato";
+		cout<<"\n5. Guardar dato en un archivo";
+		cout<<"\n6. Cargar dato en un archivo";
+		cout<<"\n7. Salir";
+		cout<<"\n1. Seleccione la opcion deseada: ";
 		cin>>opc;
 		
 		switch(opc){
 			case 1:
 				//buscar
-				cout<<"\n Ingresa el dato a buscar";
+				cout<<"\n Ingresa el dato a buscar: ";
 				cin>>da;
 				if(buscar(da)){
-					cout<<"Dato si existe";
+					cout<<"Dato si existe"<<endl;
 				}else{
-					cout<<"El dato no existe";
+					cout<<"El dato no existe"<<endl;
 					getch(); //pausa
 				}
 				break;
 			case 2:
-				cout<<"\n Ingresa el dato";
+				cout<<"\n Ingresa el dato: ";
 				cin>>da;
 				insertar(da);
 				break;
@@ -79,7 +80,7 @@ void menu(void){
 			case 4:
 				//borrar
 				borrar();
-				break:
+				break;
 			case 5:
 				//guardar
 				guardar();
@@ -104,7 +105,7 @@ void menu(void){
 				exit(0);
 				
 			default:
-					cout<<"Opcion invalida";
+					cout<<"Opcion invalida"<<endl;
 					getch();
 		}
 	}while(opc);
@@ -114,7 +115,7 @@ void mostrar(void){
 	int cont = 1;
 	//saber si hay lista
 	if(!i){
-		cout<<"No hay lista para mostrar";
+		cout<<"No hay lista para mostrar"<<endl;
 		getch();
 		return;
 	}
@@ -127,7 +128,7 @@ void mostrar(void){
 		cout<<cont++<<"\nValor : "<<p->i<<endl;
 		p = p -> s;
 	}
-	cout<<"\n Fin de la lista";
+	cout<<"\n Fin de la lista"<<endl;
 	getch();
 	
 }
@@ -135,9 +136,9 @@ void mostrar(void){
 int buscar(int d){
 		//saber si hay lista
 	if(!i){
-		cout<<"No hay en la lista para mostrar";
+		cout<<"No hay en la lista para mostrar"<<endl;
 		getch();
-		return;
+		return(0);
 	}
 	//si hay 
 	p = i;
@@ -146,7 +147,7 @@ int buscar(int d){
 	while(p ->s  && p ->i < d){
 		//recorrer los valoeres de la lista 
 		a = p;
-		p = P->s;
+		p = p->s;
 	}
 	return (p->i == d?1:0);
 }
@@ -160,63 +161,59 @@ int buscar(int d){
 3. final solo se apunta y se ajusta el apuntador 
 
 */
-void insertar(int da){
-	//saber si esta vacia la lista
+void insertar(int dat){
+	//saber si essta vacia la lista
 	if(!i){
-		
-		//es la primera vez que se mete un dato
-		i= new(dato);
+		i=new(dato);
 		i->s=NULL;
-		i->i = dat;
-		return;
-	}
-	if(buscar(dat)){
-		//porque si existe 
-		cout<<"El dato existe";
-		getch();
+		i->i=dat;
 		return;
 	}
 	/*
-	supongamos que tenemos lo sig. 
-	nodo1 = -3, nodo2 =0, nodo3 = 5
+	supongamos que tenemos los siguentes datos
+	nodo1 = -3, nodo2 = 0, nodo3 = 5
 	insertar 3
-	
 	*/
-	
-	e = new (dato);
-	
-	e->i =dato;
-	
-	
-	if(p == i && p -> s){
-		//promero hago la comparacion
-		if (p ->i < e->i){
-		//fina 	
-			p->s =e;
-			e->s = NULL;
+	if(buscar(dat)){
+		cout<<"\t\nDato existente"<<endl;
+		getch();
+		return;
+	}
+	e=new(dato);
+	e->i=dat;
+	if(p==i && p->s){
+		e->s=p;
+		i=e;
+		return;
+	}
+	if(p==i && !p->s){
+		//primero hago la comparacion
+		if(p->i < e->i){
+			//final
+			p->s=e;
+			e->s=NULL;
 		}else{
-			e->s = p;
-			i=e;
+			e->s=p;
+			i=e;	
 		}
 		return;
 	}
-	if(p->s ){
-		a ->s =e;
-		e ->s P;
+	if(p->s){
+		a->s=e;
+		e->s=p;
 		return;
 	}
-	if (e ->i > p->i ){
-		e -> s =NULL;
-		p->s = e;
+	if(e->i > p->i){
+		e->s=NULL;
+		p->s=e;
 	}else{
-		a->s = e;
-		e->s= p;
-		
+		a->s=e;
+		e->s=p;
 	}
 }
 //borrar
 void borrar(void){
-	cout<<"\n Ingresa el dato que deseas borrar";
+	cout<<"\n Ingresa el dato que deseas borrar: ";
 	cin>>da;
 	if(buscar(da)){
 		if(a){
@@ -225,12 +222,55 @@ void borrar(void){
 		i = p ->s;
 	}
 	delete (p);
-	cout<<"\n Dato eliminado";
+	cout<<"\n Dato eliminado"<<endl;
 }else{
-	cout<<"\n Dato no encontrado";
+	cout<<"\n Dato no encontrado"<<endl;
 	getch();
 }
 }
+
+void guardar(void){
+	FILE *archivo;
+	archivo =fopen("GUARDAR.TXT","w");
+	if(!i){
+		cout<<"\nNo se encuentra la lista para guardar"<<endl;
+		getch();
+		return;
+	}
+	p = i;
+	while(p){
+		fprintf(archivo, "%i\n", p->i);
+		p = p->s;
+	}
+	cout<<"\n\n Archivo guardado"<<endl;
+	fclose(archivo);
+	getch();
+}
+
+void cargar (void){
+	int c, x;
+	FILE *archivo;
+	archivo = fopen("GUARDAR.TXT", "r");
+	if(!archivo){
+		cout<<"\nNo exixte el archivo"<<endl;
+		getch();
+		return;
+	}
+	do{
+		c=fscanf(archivo,"%i\n",&x);
+		if(c!=EOF){
+			insertar(x);
+		}
+	}while(c!=EOF);
+	
+	cout<<"\nArchivo guardado"<<endl;
+	fclose(archivo);
+	getch();
+	
+	}
+	
+
+
 
 
 
