@@ -20,7 +20,7 @@ int comPila(TodaPila &p);
 void HanoiT(int n, TodaPila &original, TodaPila &aux, TodaPila &fin, TodaPila *a, TodaPila *b, TodaPila *c );
 void mostrarPila(TodaPila fin);
 
-main(){
+int main(){
 	
 	int n = 7;
 	TodaPila original, aux, fin;
