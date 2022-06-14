@@ -22,7 +22,7 @@ typedef nodo *pila;
 //metodos del programa 
 void imprimir1(pila);
 void imprimir2(pila);
-void eliminarPila(pila &);
+void eliminarPila(pila);
 void push(pila &, int);
 void unir(pila, pila);
 int pop(pila &);
@@ -73,7 +73,7 @@ main(){
 	}while(opc!=4);
 }
 void push(pila &p, int n){
-	pila q = (struct nodo);
+	pila q = new(struct nodo);
 	q->nro = n;
 	q->siguente =p;
 	p = q;
@@ -89,3 +89,11 @@ void unirPila(pila p1, pila p2){
 		
 	}
 }
+void eliminarPila(pila,int &v){
+
+	pila aux= new(struct nodo);
+	v = aux->nro;
+	pila = aux->siguiente;
+	delete aux;
+}
+

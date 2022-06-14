@@ -102,3 +102,4 @@ void eliminarPila(Nodo *&pila, int &v){
 	pila = aux->siguente;
 	delete aux;
 }
+
