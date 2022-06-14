@@ -22,12 +22,12 @@ typedef nodo *pila;
 //metodos del programa 
 void imprimir1(pila);
 void imprimir2(pila);
-void eliminarPila(pila);
+void eliminarPila(pila &);
 void push(pila &, int);
-void unir(pila, pila);
+void unirPilas(pila , pila );
 int pop(pila &);
 
-main(){
+int main(){
 	//declarar las pilas 
 	pila p1 = NULL;
 	pila p2 = NULL;
@@ -37,9 +37,10 @@ main(){
 	
 	do{
 		cout<<"1.- Apilar\n";
-		cout<<"1.- Ver la pila\n";
-		cout<<"1.- Unir la pila\n";
-		cout<<"1.- Salir\n";
+		cout<<"2.- Ver la pila\n";
+		cout<<"3.- Unir la pila\n";
+		cout<<"4.- Eliminar elementos\n";
+		cout<<"5.- Salir\n";
 		cout<<"Ingresar la opcion deseada: \n";
 		
 		cin>>opc;
@@ -47,12 +48,14 @@ main(){
 		switch(opc){
 			case 1:
 				cout<<"Ingrese el limite de la pila 1: \n";
+				cin>>n;
 				for(i = 0; i<n; i++){
 					cout<<"Valor: \n";
 					cin>>valor;
 					push(p1, valor);
 				}
 				cout<<"Ingrese el limite de la pila 2: \n";
+				cin>>n;
 				for(i = 0; i<n; i++){
 					cout<<"Valor: \n";
 					cin>>valor;
@@ -62,15 +65,21 @@ main(){
 			case 2:
 				cout<<"Contenido de la pila 1: \n";
 				imprimir1(p1);
-				cout<<"Contenido de la pila 1: \n";
+				cout<<"Contenido de la pila 2: \n";
 				imprimir2(p2);
 				break;
 			case 3:
-				cout<<"Pilas unidas ";
-					unir(p1, p2);
-				break;	
+				cout<<"Pilas unidas"<<endl;
+        		unirPilas(p1,p2);
+        		break;	
+				
+			case 4:
+				eliminarPila(p1);
+				cout<<"Pila uno destruida\n";
+				break;
 		}
-	}while(opc!=4);
+	}while(opc!=5);
+	return 0;
 }
 void push(pila &p, int n){
 	pila q = new(struct nodo);
@@ -79,21 +88,31 @@ void push(pila &p, int n){
 	p = q;
 }
 
-void unirPila(pila p1, pila p2){
-	pila q = p1;
-	while(q->siguente !=NULL){
-		q=q->siguente;
-		q->siguente=p2;
-	}
-	while(p1 !=NULL){
-		
+void eliminarPila(pila &p){
+pila q;
+  while(p!=NULL){
+	q=p;
+	p=p->siguente;
+	delete(q); 
 	}
 }
-void eliminarPila(pila,int &v){
-
-	pila aux= new(struct nodo);
-	v = aux->nro;
-	pila = aux->siguiente;
-	delete aux;
+void unirPilas(pila p1, pila p2){
+  pila q=p1;
+  while(q->siguente!=NULL)
+  q=q->siguente;
+  q->siguente=p2;
 }
-
+void imprimir1(pila p1){
+	while(p1!=NULL){
+		cout<<p1->nro<<endl;
+		p1=p1->siguente;
+	}
+	cout<<endl;
+}
+void imprimir2(pila p2){
+	while(p2!=NULL){
+		cout<<p2->nro<<endl;
+		p2=p2->siguente;
+	}
+	cout<<endl;
+}
