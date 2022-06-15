@@ -1,6 +1,6 @@
 /*
 vamos a programar dos pilas que sirvan para porder unir ambos elementos 
-el programa debe de contener ingresar el tamaño de la pila un menu 
+el programa debe de contener ingresar el tama?o de la pila un menu 
 push, pop y mostrar los elementos de la pila
 */
 
@@ -27,11 +27,11 @@ void push(pila &, int);
 void unirPilas(pila , pila );
 int pop(pila &);
 
-int main(){
+main(){
 	//declarar las pilas 
 	pila p1 = NULL;
 	pila p2 = NULL;
-	pila p3 = NULL;
+	pila p = NULL;
 	
 	int opc, n, valor, i;
 	
@@ -40,7 +40,8 @@ int main(){
 		cout<<"2.- Ver la pila\n";
 		cout<<"3.- Unir la pila\n";
 		cout<<"4.- Eliminar elementos\n";
-		cout<<"5.- Salir\n";
+		cout<<"5.- Desapilar\n";
+		cout<<"6.- Salir\n";
 		cout<<"Ingresar la opcion deseada: \n";
 		
 		cin>>opc;
@@ -75,17 +76,33 @@ int main(){
 				
 			case 4:
 				eliminarPila(p1);
-				cout<<"Pila uno destruida\n";
+				cout<<"Pila uno y dos destruidas\n";
+				eliminarPila(p2);
+				break;
+			case5:
+				if(p1!=NULL){
+					cout<<"Valor Eliminado";
+					n=pop(p1);
+					cout<<n<<endl;
+				}else
+					cout<<"Pila vacia"<<endl;
 				break;
 		}
-	}while(opc!=5);
-	return 0;
+	}while(opc!=6);
 }
 void push(pila &p, int n){
 	pila q = new(struct nodo);
 	q->nro = n;
 	q->siguente =p;
 	p = q;
+}
+
+int pop(pila &p){
+	int n=p->nro;
+	pila q=p;
+	p=p->siguente;
+	delete (q);
+	return n;
 }
 
 void eliminarPila(pila &p){
