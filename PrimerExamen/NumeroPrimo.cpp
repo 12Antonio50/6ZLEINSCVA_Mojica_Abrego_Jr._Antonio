@@ -14,11 +14,11 @@ int main(){
 		for(int j=1;j<=num;j++){
 			if(i%j==0){
 				contador++;
-			}else{
-				cout<<"No es un numero primo\n";
 			}
 		}
 		if(contador==2){
+			cout<<"No es un numero primo\n";
+		}else{
 			cout<<i<<"<<";
 		}
 	}

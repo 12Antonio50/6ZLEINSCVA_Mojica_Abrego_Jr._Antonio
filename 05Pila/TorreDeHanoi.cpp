@@ -13,9 +13,9 @@ typedef struct pila TodaPila;
 
 int push(TodaPila &p, int n);
 int pop(TodaPila &p, int &n);
-int apilado(TodaPila p, int &n);
-int vacio(TodaPila p);
-int comPila(TodaPila &p);
+int stacktop(TodaPila p, int &n);
+int empty(TodaPila p);
+void comPila(TodaPila &p);
 
 void HanoiT(int n, TodaPila &original, TodaPila &aux, TodaPila &fin, TodaPila *a, TodaPila *b, TodaPila *c );
 void mostrarPila(TodaPila fin);
@@ -56,29 +56,29 @@ int push(TodaPila &p, int n){
 	}
 
 int pop(TodaPila &p, int &n){
-	if(vacio(p))
+	if(empty(p))
 		return 0;
 	n = p.dato[p.alto--];
 	return 1;
 }
-int apilado(TodaPila p, int &n){
-	if(vacio(p))
+int stacktop(TodaPila p, int &n){
+	if(empty(p))
 		return 0;
 	n = p.dato[p.alto];
 	return 0;
 }
-int vacio(TodaPila p){
+int empty(TodaPila p){
 	if(p.alto == -1)
 		return 1;
 	return 0;
 }
-int comPila(TodaPila &p){
+void comPila(TodaPila &p){
 	p.alto = -1;
 }
 void HanoiT(int n, TodaPila &original, TodaPila &aux, TodaPila &fin,
 TodaPila *a, TodaPila *b, TodaPila *c ){
 
-	int e, i= 0;
+	int e;
 	char aux1, aux2;
 	
 	if (a == &original){
@@ -96,7 +96,10 @@ TodaPila *a, TodaPila *b, TodaPila *c ){
 	}else if (c == &fin){
 		aux2 = 'C';	
 	}
-	//Comienzo de recursividad 	
+	//Comienzo de recursividad 
+	for(int i =0; i<=e;i++)	{
+	int cont=0;
+	cont++;
 	if(n == 1){
 		pop(original, e);
 		push(fin, e);
@@ -108,6 +111,9 @@ TodaPila *a, TodaPila *b, TodaPila *c ){
 		cout<<"\nDisco "<<n<<" movido de la Torre "<<aux1<<" a la Torre "<<aux2<<"";
 		HanoiT(n - 1, aux, original, fin, a, b, c);
 	}
+	cout<<i;
+}
+
 }
 void mostrarPila(TodaPila fin){
 	int n;

@@ -18,7 +18,7 @@ struct Nodo{
 //metodos 
 void insertarPila(Nodo *&, int);
 void mostrarPila(Nodo *&);
-void eliminarPila(Nodo *&, int);
+void eliminar(Nodo *&, int);
 
 
 int main(){
@@ -26,10 +26,10 @@ int main(){
 	el primero en entrar es el ultimo de salir y el ultimo
 	es elprimero en salir
 	*/
-	int cantidad, i=0, op=1, v=0;
+	int cantidad, i=0, op=1, v=0, n=0;
 	//primera definicion de la pila 
 	Nodo *pila = NULL;
-	while(op=4){
+	while(op!=4){
 		cout<<"selecciona la opcion deseada"<<endl;
 		cout<<"1.-Insertar dato:"<<endl;
 		cout<<"2.-Mostrar valores:"<<endl;
@@ -58,7 +58,7 @@ int main(){
 				}else{
 					cout<<"Eliminar dato\n";
 					while(pila!=NULL){
-						eliminarPila(pila, v);
+						eliminar(pila, v);
 						if(pila!=NULL){
 							cout<<" | "<<endl;	
 						}else{
@@ -74,17 +74,15 @@ int main(){
 	return 0;
 }
 
-void insertarPila(Nodo *&, int v){
+void insertarPila(Nodo *&pila, int v){
 	Nodo *insPila = new Nodo();
 	insPila->valor= v;
-//	insPila->siguente=pila;
+  insPila->siguente=pila;
 	pila = insPila;
 }
 
-void mostarPila(Nodo *&pila){
-	//necesistamos un elemento que almacene valores
+void mostrarPila(Nodo *&pila){
 	Nodo *aux;
-	
 	if(pila==NULL){
 		cout<<"La pila esta vacia\n";
 	}else{
@@ -96,10 +94,9 @@ void mostarPila(Nodo *&pila){
 	}
 }
 
-void eliminarPila(Nodo *&pila, int &v){
+void eliminar(Nodo *&pila, int v){
 	Nodo *aux = pila;
 	v = aux->valor;
 	pila = aux->siguente;
 	delete aux;
 }
-
