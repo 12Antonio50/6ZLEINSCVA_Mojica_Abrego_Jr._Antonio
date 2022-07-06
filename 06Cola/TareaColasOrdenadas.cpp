@@ -101,9 +101,8 @@ void insertar(struct cola &q, string c, int diner, int pri, int turn){
 void menu(){
 	cout<<"\t\t\t\t\t|****Ejemplo de colas de prioridad***|"<<endl;
 	cout<<"\t\t\t\t\t|1.- Asignar turno                   |"<<endl;
-	cout<<"\t\t\t\t\t|2.- Realizar la operacion           |"<<endl;
-	cout<<"\t\t\t\t\t|3.- Mostrar tarjetahabientes en fila|"<<endl;
-	cout<<"\t\t\t\t\t|4.- Salir                           |"<<endl;
+	cout<<"\t\t\t\t\t|2.- Mostrar tarjetahabientes en fila|"<<endl;
+	cout<<"\t\t\t\t\t|3.- Salir                           |"<<endl;
 	cout<<"\t\t\t\t\t|************************************|\n";
 }
 void menu2(){
@@ -143,10 +142,7 @@ int main(){
 				
 				cout<<"Ingresar turno: \n";
 				cin>>turn;
-				cout<<"\n Usuario: "<<c<<" ingresado\n";
-				break;
 				
-			case 2:
 				do{
 				cout<<"\nIngreses una cantidad de dinero a su cuenta $\n";
 				cin>>diner;
@@ -154,10 +150,10 @@ int main(){
 				}while(diner<0||diner>5000);
 				
 				insertar(q, c, priori, diner, turn);
-				
+				cout<<"\n Usuario: "<<c<<" ingresado\n";
 				break;
 				
-			case 3:
+			case 2:
 				cout<<"\n Mostrar elementos de la cola: \n";
 				if(q.delante!=NULL){
 					mostrarCola(q);
@@ -173,6 +169,6 @@ int main(){
 			}
 		system("pause");
 	system("cls");
-	}while(op!=4);
+	}while(op!=3);
 	return 0;
 }
