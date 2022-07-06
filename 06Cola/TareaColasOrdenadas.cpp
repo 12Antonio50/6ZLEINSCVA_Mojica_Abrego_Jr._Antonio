@@ -86,7 +86,6 @@ void ordenarPrioridad(struct cola &q){
 				
 				aux2->prioridad = p_aux;
 				aux2->dato = c_aux;
-				aux2->dinero = d_aux;
 			}
 			aux2=aux2->siguiente;
 		}
