@@ -113,7 +113,7 @@ void menu2(){
 	cout<<"\t\t\t\t\t|***************************|\n";
 }
 int main(){
-	system("color 5F");
+	system("color 1E");
 	struct cola q;
 	
 	q.delante = NULL;
