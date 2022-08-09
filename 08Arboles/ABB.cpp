@@ -26,8 +26,6 @@ void mostrar(Nodo *arbol, int espaciado);
 void preOrder(Nodo *arbol);
 void inOrder(Nodo *arbol);
 void postOrder(Nodo *arbol);
-bool esUnNumero(const char* cadena);
-bool seguirIngresando();
 char mainMenu();
 int pedirNumero();
 
@@ -37,12 +35,7 @@ int main(){
 
 	do{
 		system("CLS");
-		if(arbol){
-			printf("\n ******** Ejemplo de Arboo ABB *****\n");
-			mostrar(arbol, 0);
-			printf("\n **** Fin del Arbol ABB **** \n");
 
-		}
 		switch(op = mainMenu()){
 			case '1':
 				insertar(arbol, pedirNumero(), NULL);
@@ -65,7 +58,7 @@ int main(){
 				postOrder(arbol);
 				printf("\n Fin de postorder n");
 				break;
-		}
+	 }
 		printf("\n");
 		system("PAUSE");
 	}while(op != '0');
@@ -87,37 +80,12 @@ char mainMenu(){
 
 }
 
-bool seguirIngresando(){
-	//metodo par aseguir ingresando valores al arbol
-	char temp = '0';
-	do{
-		printf("\n Desea seguir ingresando valores al Arbol (Y/N)\n");
-		scanf("%c", &temp);
-		switch(temp){
-			case 'Y':
-				return true;
-			case 'N':
-				return false;
-		}
-	}while(temp != 'Y' || temp != 'N');
-}
-
-bool esUnNumero(const char *cadena){
-	for(; *cadena; ++cadena){
-		if(!std:: isdigit(*cadena))
-		return false;
-	}
-	return true;
-}
-
 int pedirNumero(){
 	char temp[255];
 
-	do{
-		printf("\n Ingrese el numero: \n");
-		scanf("%s", temp);
+	printf("\n Ingrese el numero: \n");
+	scanf("%s", temp);
 
-	}while(!esUnNumero(temp));
 	//regresa de una cadea un int
 	return atoi(temp);
 }

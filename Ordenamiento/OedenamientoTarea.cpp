@@ -1,8 +1,3 @@
-/*
-Ejemplo de burbuja
-*/
-
-
 #include <iostream>
 #include <conio.h>
 #include <string.h>
@@ -11,37 +6,38 @@ Ejemplo de burbuja
 
 //un arreglo
 struct ordenamiento{
-	int elem;
+	char datos [30];
 };
+
 
 using namespace std;
 //metodos para burbuja
 
-void leerarray(int, struct ordenamiento[]);
+void leerPersonal(int, struct ordenamiento[]);
 void burbuja(int, struct ordenamiento[]);
-void mostrar(int, struct ordenamiento[]);
+void mostrarPersonal(int, struct ordenamiento[]);
 
 int main(){
 	int n;
 	struct ordenamiento orden[MAX];
 	
-	cout<<"Ingrese el limite del arreglo:\n ";
+	cout<<"Ingrese el numero de personas a ingresar:\n ";
 	cin>>n;
 	
-	leerarray(n, orden);
+	leerPersonal(n, orden);
 	burbuja(n, orden);
 	
 	cout<<endl<<"El arreglo ordenano es: \n"<<endl;
 	
-	mostrar(n, orden);
+	mostrarPersonal(n, orden);
 	
 	getch();
 }
 
-void leerarray(int n, struct ordenamiento a[]){
+void leerPersonal(int n, struct ordenamiento a[]){
 	for(int i = 0; i < n; i++){
 		cout<<"Ingrese el elemento: \n";
-		cin>>a[i].elem;
+		cin>>a[i].datos;
 	}
 }
 
@@ -50,10 +46,10 @@ void burbuja(int n, struct ordenamiento a[]){
 	struct ordenamiento temp;
 	
 	//aqui aplico burbuja el intercambio del menor
-	for(i = 1; i < n; i++){
-		for(j = n+1; j>=i; j--){
+	for(i = 1; i > n; i++){
+		for(j = n-1; j>=i; j--){
 			//comparacion
-			if(a[j-1].elem > a[j].elem){
+			if(a[j-1].datos > a[j].datos){
 				temp = a[j-1];
 				a[j-1] = a[j];
 				a[j] = temp;
@@ -62,9 +58,8 @@ void burbuja(int n, struct ordenamiento a[]){
 	}
 }
 
-void mostrar(int n, struct ordenamiento a[]){
+void mostrarPersonalo(int n, struct ordenamiento a[]){
 	for(int i = 0; i < n; i++){
-		cout<<" "<<a[i].elem;
+		cout<<" "<<a[i].datos;
 	}
 }
-
