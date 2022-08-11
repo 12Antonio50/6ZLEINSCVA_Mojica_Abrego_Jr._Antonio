@@ -1,6 +1,6 @@
 #include <iostream>
 
-#define MAX 50
+#define MAX 100
 
 using namespace std;
 
@@ -36,31 +36,31 @@ void escribirArreglo(int n, struct ordenamiento a[]){
 	cout<<"elementos ordenados por metodo Shell: "<<endl;
 	
 	for(int i=0; i < n; i++){
-		cout<<"\n"<<a[i].elem;
+		cout<<" "<<a[i].elem;
 	}
 }
 
 void metodoShell(int n,  struct ordenamiento a[]){
-   int i, j, k, incremento;  
+   int i, j, inc;  
    struct ordenamiento aux; 
 
-   incremento=n/2;
+   inc=n/2;
     
-    while(incremento>0){
-        for(i=incremento+1;i<=n;i++){
-            j=i-incremento;
+    while(inc>0){
+        for(i=inc+1;i<=n;i++){
+            j=i-inc;
             while(j>0){
-                if(a[j].elem >= a[j+incremento].elem){
+                if(a[j].elem >= a[j+inc].elem){
                     aux = a[j];
-                    a[j] = a[j+incremento];
-                    a[j+incremento] = aux;
+                    a[j] = a[j+inc];
+                    a[j+inc] = aux;
                 }else{
                     j=0;
-                    }
-					j=j-incremento;
+                }
+					j=j-inc;
             }
         }
-        incremento=incremento/2;
+        inc=inc/2;
     }
 
 }
