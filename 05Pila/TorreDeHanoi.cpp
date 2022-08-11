@@ -98,8 +98,6 @@ TodaPila *a, TodaPila *b, TodaPila *c ){
 	}
 	//Comienzo de recursividad 
 	for(int i =0; i<=e;i++)	{
-	int cont=0;
-	cont++;
 	if(n == 1){
 		pop(original, e);
 		push(fin, e);
@@ -118,6 +116,6 @@ TodaPila *a, TodaPila *b, TodaPila *c ){
 void mostrarPila(TodaPila fin){
 	int n;
 	while (pop(fin, n)){
-		cout<< n;
+		cout<<n;
 	}
 }
