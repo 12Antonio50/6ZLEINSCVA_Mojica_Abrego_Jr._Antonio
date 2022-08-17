@@ -24,37 +24,30 @@ void escribirArreglo(int, struct ordenamient []);
 void metodoShell(int, struct ordenamient []);
 void leerarray(int, struct ordenamient []);
 
-void seleccionsort (int  A[], int n) 
-{
-        int min,i,j,aux;
-        for (i=0; i<n-1; i++) 
-		{
-              min=i;
-              for(j=i+1; j<n; j++)
-                    if(A[min] > A[j])
-                       min=j;
-              aux=A[min];
-              A[min]=A[i];
-              A[i]=aux ;
-        }
+void seleccion (int  a[], int n) {
+    int k,i,j,aux;
+        
+    for (i=0; i<n-1; i++){
+		k=i;
+        for(j=i+1; j<n; j++)
+            if(a[k] > a[j])
+                k=j;
+              aux=a[k];
+              a[k]=a[i];
+              a[i]=aux ;
+    }
 
 }
-void leeCadena(int cant,int n[])
-{
-    int i;
-    for(i=0;i<cant;i++)
-    {
+void leerarray(int cant,int n[]){
+    for(int i=0;i<cant;i++){
         cout<<"Ingresa numero "<<i+1<<": ";
         cin>>n[i];
     }
      
 }
 
-void muestraCadena(int cant,int n[])
-{
-    int i;
-    for(i=0;i<cant;i++)
-    {
+void muestrararray(int cant,int n[]){
+    for(int i=0;i<cant;i++){
         cout<<n[i]<<endl;
     }
 }
@@ -63,8 +56,8 @@ int main (){
 	int opc, n;
 	
 	cout<<"Selecciona un opcion de ordenamiento\n "<<endl;
-	cout<<"1) Metodo burbuja\n ";
-	cout<<"2) Metodo shell\n ";
+	cout<<"1) Metodo burbuja\n";
+	cout<<"2) Metodo shell\n";
 	cout<<"3) Metodo seleccion directa\n ";
 	cin>>opc;
 	
@@ -96,15 +89,16 @@ int main (){
 			
 			break;
 		case 3:
+			int a[largo],n;
+			
 			cout<<"Metodo SELECCION:\n "<<endl;
-			int A[largo],n;
 			
 			cout<<"Ingreasa la dimension del arreglo: ";
 			cin>>n;
 			
-			leeCadena(n,A);
-  			seleccionsort(A,n);
-			muestraCadena(n,A);
+			leerarray(n, a);
+  		    seleccion(a, n);
+			muestrararray(n, a);
 			break;
 		default: 
 			cout<<"OPCION INCORRECTA";
