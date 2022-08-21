@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cctype>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define MAX 100
 
@@ -23,6 +26,7 @@ int main (){
 	metodoShell(n, orden);
 	
 	escribirArreglo(n, orden);
+	
 }
 
 void leerarray(int n, struct ordenamiento a[]){
@@ -33,16 +37,19 @@ void leerarray(int n, struct ordenamiento a[]){
 }
 
 void escribirArreglo(int n, struct ordenamiento a[]){
-	cout<<"elementos ordenados por metodo Shell: "<<endl;
+	cout<<"\nelementos ordenados por metodo Shell: "<<endl;
 	
 	for(int i=0; i < n; i++){
 		cout<<" "<<a[i].elem;
 	}
+	for(int i=0; i < n; i++){
+		cout<<" \n"<<malloc(sizeof(a[i].elem));
+	}
 }
 
 void metodoShell(int n,  struct ordenamiento a[]){
-   int i, j, inc;  
-   struct ordenamiento aux; 
+	int i, j, inc;  
+    struct ordenamiento aux; 
 
    inc=n/2;
     
@@ -57,10 +64,9 @@ void metodoShell(int n,  struct ordenamiento a[]){
                 }else{
                     j=0;
                 }
-					j=j-inc;
+				j=j-inc;
             }
         }
         inc=inc/2;
     }
-
 }
