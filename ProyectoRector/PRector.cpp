@@ -37,6 +37,7 @@ struct nodoCita{
 }*inicioCita, *finalCita;
 
 void insertarPacienteyCita();
+void insertarNodoCita();
 void buscarPacienteExpediente();
 void buscarCitaID();
 void buscarCitaFecha();
@@ -67,6 +68,14 @@ int main(){
 
 void insertarPacienteyCita(){
 	
+	int edad;
+	string fechaRegistro;
+	string tipoSangre;
+	char enfermedadesCronicas[60];
+	char enfermedadesCongenitas[60];
+	char alergias[50];
+	char discapacidad[50];
+	
 	char nombree[60];
 	int idPaciente;
 	char citaFecha[15];
@@ -75,20 +84,27 @@ void insertarPacienteyCita(){
 	double estatura;
 	string clasificacionImc;
 	
+	ofstream file;
+	file.open("Expediente");
+	
 	
 	//ingreso datos del nodo paciente
 	nodoPaciente* nuevoPaciente = new nodoPaciente();
 	
 	cout << "\nIngrese nombre completo: ";
-	cin>>nombree;
+	cin.ignore();
+	cin.getline(nombree, 60);
 	memcpy(nuevoPaciente->nombre, nombree, 60);
 	
 	cout<<"\nIngrese edad: ";
-	cin >> nuevoPaciente->edad;
+	cin >> edad;
+	nuevoPaciente->edad = edad;
 	cout << "\nIngrese la fecha de hoy: ";
-	cin >> nuevoPaciente->fechaRegistro;
+	cin >> fechaRegistro;
+	nuevoPaciente->fechaRegistro = fechaRegistro;
 	cout << "\nIngrese su tipo de sangre: ";
-	cin >> nuevoPaciente->tipoSangre;
+	cin >> tipoSangre;
+	nuevoPaciente->tipoSangre = tipoSangre;
 	cout << "\nIngrese su estatura: ";
 	cin >> estatura;
 	nuevoPaciente->estatura = estatura;
@@ -122,19 +138,29 @@ void insertarPacienteyCita(){
 	
 	
 	cout << "\nIngrese enfermedades cronicas del paciente: ";
-	cin>>nuevoPaciente->enfermedadesCronicas;
+	cin.ignore();
+	cin.getline(enfermedadesCronicas, 60);
+	memcpy(nuevoPaciente->enfermedadesCronicas, enfermedadesCronicas, 60);
 	cout << "\nIngrese enfermedades congenitas del paciente: ";
-	cin>>nuevoPaciente->enfermedadesCongenitas;
+	cin.ignore();
+	cin.getline(enfermedadesCongenitas, 60);
+	memcpy(nuevoPaciente->enfermedadesCongenitas, enfermedadesCongenitas, 60);
 	cout << "\nIngrese alergias del paciente: ";
-	cin>>nuevoPaciente->alergias;
+	cin.ignore();
+	cin.getline(alergias, 50);
+	memcpy(nuevoPaciente->alergias, alergias, 60);
 	cout << "\nIngrese discapacidades del paciente: ";
-	cin>>nuevoPaciente->discapacidad;
+	cin.ignore();
+	cin.getline(discapacidad, 50);
+	memcpy(nuevoPaciente->discapacidad, discapacidad, 60);
+	
 	cout << "\nIngrese ID del paciente: ";
 	cin >> idPaciente;
 	nuevoPaciente->idPaciente = idPaciente;
 	
 	cout << "\nIngrese la fecha de la proxima cita del paciente (DD/MM/AAAA): ";
-	cin>>citaFecha;
+	cin.ignore();
+	cin.getline(citaFecha, 15);
 	//memcpy(nuevoPaciente->citaFecha, citaFecha, 60);
 
 	
@@ -159,14 +185,30 @@ void insertarPacienteyCita(){
 	memcpy(nuevoCita->citaFecha, citaFecha, 60);
 	
 	cout << "\nIngrese la hora de la proxima cita (HH:MM): ";
-	cin>>nuevoCita->hora;
+	cin.ignore();
+	cin.getline(nuevoCita->hora, 10);
 	cout << "\nIngrese el consultorio asignado: ";
-	cin>>nuevoCita->consultorio;
+	cin.ignore();
+	cin.getline(nuevoCita->consultorio, 5);
 	//cout << "\nIngrese ID del paciente: ";
 	nuevoCita->idPaciente = idPaciente;
 	
 
+	file<<"\nNombre: "<<nombree;
+	file<<"\nEdad: "<<edad;
+	file<<"\nFecha de registro: "<<fechaRegistro;
+	file<<"\nTipo de sangre: "<<tipoSangre;
+	file<<"\nEstatura: "<<estatura;
+	file<<"\nPeso: "<<peso;
+	file<<"\nIMC: "<<imc;
+	file<<"\nClasificacion segun su IMC: "<<clasificacionImc;
+	file<<"\nEnfermedades cronicas: "<<enfermedadesCronicas;
+	file<<"\nEnfermedades congenitas: "<<enfermedadesCongenitas;
+	file<<"\nAlergias: "<<alergias;
+	file<<"\nDiscapacidad: "<<discapacidad;
+	file<<"\nID del paciente: "<<idPaciente;
 	
+	cout<<"\nArchivo creado \n";
 
 	if(inicioCita==NULL){
 		inicioCita = nuevoCita;
@@ -176,22 +218,67 @@ void insertarPacienteyCita(){
 		finalCita->siguienteCita = nuevoCita;
 		nuevoCita->siguienteCita = NULL;
 		finalCita = nuevoCita;
+
 	}
 }
 
 
 
+void insertarNodoCita(){
+	char nombre[60];
+	char citaFecha[15];
+	char hora[10];
+	char consultorio[5];
+	
+	nodoCita* nuevo = new nodoCita();
+	
+	cout << "\nIngrese nombre completo: ";
+	cin.ignore();
+	cin>>nombre;
+	memcpy(nuevo->nombre, nombre, 60);
+	
+	cout<<"\nIngrese ID del paciente: ";
+	cin>>nuevo->idPaciente;
+	
+	cout << "\nIngrese la fecha de la proxima cita del paciente (DD/MM/AAAA): ";
+	cin.ignore();
+	cin>>citaFecha;
+	memcpy(nuevo->citaFecha, citaFecha, 60);
+	
+	cout << "\nIngrese la hora de la proxima cita (HH:MM): ";
+	cin.ignore();
+	cin>>nuevo->hora;
+	cout << "\nIngrese el consultorio asignado: ";
+	cin.ignore();
+	cin>>nuevo->consultorio;
+	
+	
+
+	if(inicioCita==NULL){
+		inicioCita = nuevo;
+		inicioCita->siguienteCita = NULL;
+		finalCita = inicioCita;
+	}else{
+		finalCita->siguienteCita = nuevo;
+		nuevo->siguienteCita = NULL;
+		finalCita = nuevo;
+	}
+	cout << endl << "Cita Ingresado " << endl << endl;
+	
+}
+
+
 void buscarPacienteExpediente(){
 	
-	//busqueda en el nodo paciente
+	//variable para buscar al nodo de acuerdo al id
+	int nodoBuscado;
+	cout <<"\nIngrese el ID del paciente a buscar: ";
+	cin >> nodoBuscado;
+	
+//busqueda en el nodo paciente
 	nodoPaciente* actualPaciente = new nodoPaciente();
 	actualPaciente = inicioPaciente;
 	bool encontradoPaciente = false;
-	
-	//variable para buscar al nodo de acuerdo al id
-	int nodoBuscado = 0;
-	cout <<"\nIngrese el ID del paciente a buscar: ";
-	cin >> nodoBuscado;
 	
 	
 	if(inicioPaciente != NULL){
@@ -223,7 +310,7 @@ void buscarPacienteExpediente(){
 			cout << "\n Nodo No Encontrado";
 		}
 	}else{
-		cout << endl << " La cola se encuentra Vacia " << endl << endl;
+		cout << endl << "La cola se encuentra Vacia " << endl << endl;
 	}	
 	
 	
@@ -251,7 +338,7 @@ void buscarCitaID(){
 			if(actualCita->idPaciente == nodoBuscado){
 				
 				
-				cout<<"Fecha de la cita: "<<actualCita->citaFecha;
+				cout<<"nFecha de la cita: "<<actualCita->citaFecha;
 				cout<<"Hora: "<<actualCita->hora;
 				cout<<"Consultorio: "<<actualCita->consultorio;
 				cout<<"Nombre del paciente: "<<actualCita->nombre;
@@ -335,6 +422,7 @@ void modificarPaciente(){
 				cout << "\nIngrese nuevamente los datos del paciente";
 				
 				cout << "\nIngrese nombre completo: ";
+				cin.ignore();
 				cin.getline(nombre, 60);
 				memcpy(actualPaciente->nombre, nombre, 60);
 				
@@ -376,13 +464,17 @@ void modificarPaciente(){
 				actualPaciente->clasificacionImc = clasificacionImc;
 				
 				cout << "\nIngrese enfermedades cronicas del paciente: ";
-				cin.getline(actualPaciente->enfermedadesCronicas, 60);
+				cin.ignore();
+				cin>>actualPaciente->enfermedadesCronicas;
 				cout << "\nIngrese enfermedades congenitas del paciente: ";
-				cin.getline(actualPaciente->enfermedadesCongenitas, 60);
+				cin.ignore();
+				cin>>actualPaciente->enfermedadesCongenitas;
 				cout << "\nIngrese alergias del paciente: ";
-				cin.getline(actualPaciente->alergias, 50);
+				cin.ignore();
+				cin>>actualPaciente->alergias;
 				cout << "\nIngrese discapacidades del paciente: ";
-				cin.getline(actualPaciente->discapacidad, 50);
+				cin.ignore();
+				cin>>actualPaciente->discapacidad;
 	
 				encontrado = true;
 			}
@@ -417,16 +509,20 @@ void modificarCita(){
 				cout << "\nIngrese nuevamente los datos del paciente: ";
 				
 				cout << "\nIngrese nombre completo: ";
+				cin.ignore();
 				cin>>nombre;
 				memcpy(actualCita->nombre, nombre, 60);
 				
 				cout << "\nIngrese la fecha de la proxima cita: ";
+				cin.ignore();
 				cin>>citaFecha;
 				memcpy(actualCita->citaFecha, citaFecha, 60);
 				
 				cout << "\nIngrese la hora de la proxima cita (HH:MM): ";
+				cin.ignore();
 				cin>>actualCita->hora;
 				cout << "\nIngrese el consultorio asignado: ";
+				cin.ignore();
 				cin>>actualCita->consultorio;
 	
 				encontrado = true;
@@ -478,6 +574,7 @@ void desplegarListaCita(){
 				cout<<"\nHora: "<<actual->hora;
 				cout<<"\nConsultorio: "<<actual->consultorio;
 				cout<<"\nID del paciente: "<<actual->idPaciente;
+				cout<<"\nNombre del paciente: "<<actual->nombre;
 				cout<<"\n";
 			
 			actual = actual->siguienteCita;
@@ -550,6 +647,7 @@ void eliminarPacienteyCita(){
 }
 
 
+
 void eliminarCita(){
 	
 	nodoCita* actual = new nodoCita();
@@ -589,9 +687,11 @@ void calculadoraImc(){
 	string clasificacionImc;
 	
 	cout<<"Ingrese su peso: ";
+	cin>>peso;
 	cout<<"Ingrese su estatura: ";
+	cin>>estatura;
 	
-	imc = peso/estatura;
+	imc = peso/(estatura*estatura);
 	
 	if(imc < 18.5){
 		clasificacionImc = "Peso bajo";
@@ -612,7 +712,7 @@ void calculadoraImc(){
 		clasificacionImc = "Obesidad grado 3";
 	}
 	
-	cout<<"Su IMC es de "<<imc<<", lo cual lo clasifica como una persona con "<<clasificacionImc;
+	cout<<"Su IMC es de "<<imc<<", lo cual lo clasifica como una persona con "<<clasificacionImc<<"\n";
 	
 	
 	
@@ -622,7 +722,6 @@ void calculadoraImc(){
 
 int menuInicio (){
 	int opc;
-	
 	cout<<"|_________________________|\n";
 	cout<<"|          INICIO         |\n";
 	cout<<"|-------------------------|\n";
@@ -663,6 +762,7 @@ int menuPaciente(){
 	switch(op){
 		case 1:
 			buscarPacienteExpediente();
+			menuPaciente();
 			break;
 		case 2:
 			buscarCitaID();
@@ -704,6 +804,7 @@ int menuDoctor(){
 			break;
 		case 4:
 			calculadoraImc();
+			menuInicio();
 			break;
 		default:
 			cout<<"Opcion incorrecta\n";
@@ -730,19 +831,20 @@ int menuCitas(){
 	cin>>opcion;
 	switch(opcion){
 		case 1:
-			modificarCita();
-			menuCitas();
+			insertarNodoCita();
+			menuDoctor();
 			break;
 		case 2:
 			menuBuscarCita();
-			system("PAUSE");
-			menuDoctor();
+			
 			break;
 		case 3:
 			eliminarCita();
+			menuCitas();
 			break;
 		case 4:
 			modificarCita();
+			menuCitas();
 			break;
 		case 5:
 			menuDoctor();
@@ -773,12 +875,15 @@ int menuBuscarCita(){
 	switch(opcion){
 		case 1:
 			buscarCitaFecha();
+			menuBuscarCita();
 			break;
 		case 2:
 			buscarCitaID();
+			menuBuscarCita();
 			break;
 		case 3:
 			desplegarListaCita();
+			menuBuscarCita();
 			break;
 		case 4:
 			menuCitas();
